@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "push_swap.h"
 
 static size_t	ft_word_count(char const *s, char c)
 {
@@ -92,23 +91,3 @@ char	**ft_split(char const *s, char c)
 	words[i] = NULL;
 	return (words);
 }
-/*
-int	main()
-{
-	char str[] = "Hello   world ! Vika";
-	char **words = ft_split(str, ' ');
-	int word_c = ft_word_count(str, ' ');
-	printf("%d\n", word_c);
-	int matrix_size = 0;
-	while (words[matrix_size])
-		matrix_size++;
-	printf("%d\n", matrix_size);
-	int i = 0;
-	while (words[i])
-	{
-		printf("%s\n", words[i]);
-		i++;
-	}
-	printf("%s\n", words[0]);
-	return (0);
-}*/

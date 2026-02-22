@@ -9,28 +9,50 @@
 /*   Updated: 2025/11/17 11:22:14 by vslyunko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+int	atoi_strict(const char *nptr, int *nbr)
 {
-	int	nb;
-	int	i;
-	int	signo;
+	int		i;
+	long	nb;
 
 	nb = 0;
 	i = 0;
-	signo = 1;
-	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
+	if ((nptr[0] == '-' || nptr[0] == '+') && (nptr[1] >= '0' && nptr[1] <= '9'))
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			signo *= -1;
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		nb = nb * 10 + (nptr[i] - '0');
 		i++;
 	}
-	return (nb * signo);
+	if (nptr[0] == '-')
+		nb *= -1;
+	if ((nptr[i] != '\0' || nptr[0] == '\0') || (nb < -2147483648 || nb > 2147483647))
+	{
+		return (0);
+	}
+	*nbr = (int)nb;
+	return (1);
 }
+/*
+#include <stdio.h>
+int main(void)
+{
+	int i;
+	i = atoi_strict("--1", &i);
+	printf("%i\n", i);
+	i = atoi_strict("+-1", &i);
+	printf("%i\n", i);
+	i = atoi_strict("1+2", &i);
+	printf("%i\n", i);
+	i = atoi_strict("2147483648", &i);
+	printf("%i\n", i);
+	i = atoi_strict("-2147483649", &i);
+	printf("%i\n", i);
+	i = atoi_strict(" 1", &i);
+	printf("%i\n", i);
+	i = atoi_strict("1 ", &i);
+	printf("%i\n", i);
+	return (0);
+}
+	*/
