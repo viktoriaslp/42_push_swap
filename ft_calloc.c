@@ -10,8 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
+static void	*ft_memset(void *s, size_t n)
+{
+	unsigned char	*str;
+	size_t			i;
+
+	str = (unsigned char *) s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
+	return (s);
+}
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*memalloc;
@@ -19,6 +33,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	memalloc = (void *) malloc(nmemb * size);
 	if (!memalloc)
 		return (NULL);
-	ft_bzero(memalloc, (nmemb * size));
+	ft_memset(memalloc, (nmemb * size));
 	return (memalloc);
 }

@@ -16,11 +16,12 @@ int main(int argc, char **argv)
     t_stack *a;
     t_stack *b;
 
-    if(argc <= 1) 
+    if(argc < 2) 
         return (1);
+    a = NULL;
     b = NULL;
     // Create stack a: parseo parametros y mostrar errores
-    a = create_stack_a(argv + 1, argc - 1);
+    create_stack_a(argv + 1, argc - 1, &a);
     if(a == NULL)
         return (1);
     // Sort ascending order using operations
