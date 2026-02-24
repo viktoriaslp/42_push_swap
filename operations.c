@@ -4,38 +4,54 @@ void    swap(t_stack **list)
 {
     t_stack *tmp;
 
+    if (!list || !*list || !(*list)->next)
+        return ;
     tmp = *list;
     *list = tmp->next;
     tmp->next = (*list)->next;
     (*list)->next = tmp;
 }
 
-void    swapa(t_stack **a, t_stack **b)
+void    sa(t_stack **a)
 {
-    // if size > 1; iintercambiar 1er con 2do
-    // imprimir sa/sb/ss.
-    if (a && b)
-        printf("ss");
-    write(2, "\n", 1);
+    swap(a);
+    write(1, "sa\n", 3);
 }
 
-void    push(t_stack **frst, t_stack **scnd)
+void    sb(t_stack **b)
+{
+    swap(b);
+    write(1, "sb\n", 3);
+}
+
+void    ss(t_stack **a, t_stack **b)
+{
+    swap(a);
+    swap(b);  //TODO: imprime si solo hace un swap
+    write(2, "ss\n", 3);
+}
+
+void    push(t_stack **from, t_stack **to)
 {
     t_stack *tmp;
 
-    tmp = *frst;
-    *frst = *scnd;
-    *scnd = tmp;
-    tmp = (*frst)->next;
-    (*frst)->next = (*scnd)->next;
-    (*scnd)->next = tmp;
+    if (!from || !*from)
+        return ;
+    tmp = (*from)->next;
+    (*from)->next = *to;
+    *to = *from;
+    *from = tmp;
 }
 
-void   pusha(t_stack **a, t_stack **b)
+void   pa(t_stack **b, t_stack **a)
 {
-    // if size > 0; iintercambiar 1eros ptr
-    // imprimir pa/pb.
-    write(2, "\n", 1);
+    push(b, a);
+    write(2, "pa\n", 3);
+}
+void   pb(t_stack **a, t_stack **b)
+{
+    push(a, b);
+    write(2, "pb\n", 3);
 }
 
 void    rotate(t_stack **list)
@@ -43,6 +59,8 @@ void    rotate(t_stack **list)
     t_stack *tmp;
     t_stack *last;
 
+    if (!list || !*list || !(*list)->next)
+        return ;
     tmp = *list;
     *list = (*list)->next;
     last = *list;
@@ -52,11 +70,21 @@ void    rotate(t_stack **list)
     tmp->next = NULL;
 }
 
-void   rot(t_stack **a, t_stack **b)
+void   ra(t_stack **a)
 {
-    // if size > 3; 1st becomes last
-    // imprimir ra/rb/rr.
-    write(2, "\n", 1);
+    rotate(a);
+    write(2, "ra\n", 3);
+}
+void   rb(t_stack **b)
+{
+    rotate(b);
+    write(2, "rb\n", 3);
+}
+void   rr(t_stack **a, t_stack **b)
+{
+    rotate(a);
+    rotate(b);
+    write(2, "rr\n", 3);
 }
 
 void    reverse(t_stack **list)
@@ -64,6 +92,8 @@ void    reverse(t_stack **list)
     t_stack *tmp;
     t_stack *scndlast;
 
+    if (!list || !*list || !(*list)->next)
+        return ;
     tmp = *list;
     scndlast = *list;
     while (scndlast->next->next)
@@ -73,9 +103,21 @@ void    reverse(t_stack **list)
     scndlast->next = NULL;
 }
 
-void   revrot(t_stack **a, t_stack **b)
+void   rra(t_stack **a)
 {
-    // if size > 3; last becomes 1st
-    // imprimir rra/rrb/rrr.
-    write(2, "\n", 1);
+    reverse(a);
+    write(2, "rra\n", 4);
+}
+
+void   rrb(t_stack **b)
+{
+    reverse(b);
+    write(2, "rrb\n", 4);
+}
+
+void   rrr(t_stack **a, t_stack **b)
+{
+    reverse(a);
+    reverse(b);
+    write(2, "rrr\n", 4);
 }

@@ -10,23 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "push_swap.h"
+#include <stdio.h>
 
 int main(int argc, char **argv)
 {
     t_stack *a;
     t_stack *b;
+    size_t  size_a;
+    size_t  size_b;
 
     if(argc < 2) 
         return (1);
     a = NULL;
     b = NULL;
-    // Create stack a: parseo parametros y mostrar errores
+    // Create stack a: parseo parametros, si errores terminar y salir.
     create_stack_a(argv + 1, argc - 1, &a);
     if(a == NULL)
         return (1);
-    // Sort ascending order using operations
-    // func for 2 nbrs, func for 3 nbrs, func for size > 3.
-    // Print while sorting
-    a = sort_stack(a, b);
+    // Check if it is already sorted.
+    if (is_sorted(a) == 1)
+        end_clean(&a, &b);
+    // If it needs to be sorted check the list size.
+    size_a = ft_lstsize(a);
+    size_b = ft_lstsize(b);
+    // Sort for 2 elements
+    if (size_a == 2)
+        sa(&a);
+    // Sort for3 elements
+    if (size_a == 3)
+        sort_three(&a);
+
+    end_clean(&a, &b);
     return (0);
 }

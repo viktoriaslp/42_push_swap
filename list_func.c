@@ -4,7 +4,7 @@ t_stack	*ft_lstnew(int value)
 {
 	t_stack	*node;
 
-	node = ft_calloc(sizeof(t_stack));
+	node = ft_calloc(1, sizeof(t_stack));
 	if (!node)
 		return (NULL);
 	node->value = value;
@@ -39,7 +39,7 @@ t_stack	*ft_lstlast(t_stack *lst)
 	return (tmp);
 }
 
-void	lstadd_back(t_stack **lst, t_stack *new)
+void	lst_add_back(t_stack **lst, t_stack *new)
 {
 	t_stack	*tmp;
 
@@ -66,6 +66,5 @@ void	free_list(t_stack **lst)
 		free(*lst);
 		*lst = tmp;
 	}
-	free(lst);
 	lst = NULL;
 }

@@ -1,19 +1,5 @@
 #include "push_swap.h"
 
-void	ft_free_mat(char **token)
-{
-    int i;
-
-    i = 0;
-	while (token[i])
-	{
-		free(token[i]);
-        i++;
-	}
-	free(token);
-	return ;
-}
-
 int	atoi_strict(const char *nptr, int *nbr)
 {
 	int		i;
@@ -46,13 +32,27 @@ int is_unique(t_stack *lst, int val)
             return (0);
         lst = lst->next;
     }
-    if (lst == NULL)
-        return (1);
+    return (1);
 }
+
+void	ft_free_mat(char **token)
+{
+    int i;
+
+    i = 0;
+	while (token[i])
+	{
+		free(token[i]);
+        i++;
+	}
+	free(token);
+	return ;
+}
+
 void    ft_error(char **matrix, t_stack **list_a)
 {
     if (matrix)
-        free_mat(matrix);
+        ft_free_mat(matrix);
     if (list_a)
         free_list(list_a);
     write (2, "Error\n", 6);
@@ -68,19 +68,19 @@ void    create_stack_a(char **argv, int count, t_stack **a)
     i = 0;
     while(i < count) 
     {
-        token = ft_split(argv[i], " ");
-        if (!token)
+        token = ft_split(argv[i], ' ');
+        if (!token || argv[i][0] == '\0')
             ft_error(token, a);
         j = 0;
         while(token[j])
         {
             if(atoi_strict(token[j], &value) == 1 && is_unique(*a, value) == 1)
-                list_add_back(a, ft_lstnew(value));
+                lst_add_back(a, ft_lstnew(value));
             else 
                 ft_error(token, a);
             j++;
         }
-        free_mat(token);
+        ft_free_mat(token);
         i++;
     }
     return ;
