@@ -1,45 +1,49 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 14:41:50 by vslyunko          #+#    #+#             */
-/*   Updated: 2026/02/02 14:41:53 by vslyunko         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #include "push_swap.h"
-#include <stdio.h>
 
-int main(int argc, char **argv)
+void    push_swap(t_stack **orig_a, t_stack **orig_b, int size_a)
 {
-    t_stack *a;
-    t_stack *b;
-    size_t  size_a;
-    size_t  size_b;
+    int size_b;
 
-    if(argc < 2) 
-        return (1);
-    a = NULL;
-    b = NULL;
-    // Create stack a: parseo parametros, si errores terminar y salir.
-    create_stack_a(argv + 1, argc - 1, &a);
-    if(a == NULL)
-        return (1);
-    // Check if it is already sorted.
-    if (is_sorted(a) == 1)
-        end_clean(&a, &b);
-    // If it needs to be sorted check the list size.
-    size_a = ft_lstsize(a);
-    size_b = ft_lstsize(b);
-    // Sort for 2 elements
-    if (size_a == 2)
-        sa(&a);
-    // Sort for3 elements
-    if (size_a == 3)
-        sort_three(&a);
+    set_index(*orig_a);
+    while ((*orig_a)->next->next->next)
+        pb(orig_a, orig_b);
+    sort_three(orig_a);
+    
+    set_cur_pos(*orig_a);
+    set_cur_pos(*orig_b);
 
-    end_clean(&a, &b);
-    return (0);
+    set_tar_pos(*orig_a, *orig_b);
+    size_b = ft_lstsize(*orig_b);
+    to_top_cost(*orig_b, size_b);
+
+    t_stack *temp;
+    temp = *orig_a;
+    printf("a\n");
+    while (temp)
+    {
+        printf("value: %i\n", temp->value);
+        printf("index: %i\n", temp->index );
+        printf("pos: %i\n",temp->pos);
+        printf("target_pos: %i\n", temp->target_pos);
+        // printf("cost_a: %i\n",temp->cost_a);
+        printf("cost_b: %i\n", temp->cost_b);
+        // printf("next: %p\n", temp->next);
+        printf("\n");
+        temp = temp->next;
+    }
+    temp = *orig_b;
+    printf("b\n");
+    while (temp)
+    {
+        printf("value: %i\n", temp->value);
+        printf("index: %i\n", temp->index );
+        printf("pos: %i\n",temp->pos);
+        printf("target_pos: %i\n", temp->target_pos);
+        // printf("cost_a: %i\n",temp->cost_a);
+        printf("cost_b: %i\n", temp->cost_b);
+        // printf("next: %p\n", temp->next);
+        printf("\n");
+
+        temp = temp->next;
+    }
 }

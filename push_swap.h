@@ -3,6 +3,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdio.h> // only for testing purposes, remove when finished.
 
 // pos: current position in stack; 
 // target_pos: if in stackB the target position in A
@@ -56,6 +57,11 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int     is_sorted(t_stack *list);
 void    end_clean(t_stack **list_a, t_stack **list_b);
 void    sort_three(t_stack **list);
+void    push_swap(t_stack **orig_a, t_stack **orig_b, int size_a);
+void    set_index(t_stack *a);
+void    set_cur_pos(t_stack *head);
+void    set_tar_pos(t_stack *a, t_stack *b);
+void    to_top_cost(t_stack *list, int size);
 
 
 #endif

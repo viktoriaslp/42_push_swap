@@ -14,21 +14,27 @@ void    swap(t_stack **list)
 
 void    sa(t_stack **a)
 {
+    if (!a || !*a || !(*a)->next)
+        return ;
     swap(a);
     write(1, "sa\n", 3);
 }
 
 void    sb(t_stack **b)
 {
+    if (!b || !*b || !(*b)->next)
+        return ;
     swap(b);
     write(1, "sb\n", 3);
 }
 
 void    ss(t_stack **a, t_stack **b)
 {
+    if (!a || !*a || !(*a)->next)
+        return ;
     swap(a);
     swap(b);  //TODO: imprime si solo hace un swap
-    write(2, "ss\n", 3);
+    write(1, "ss\n", 3);
 }
 
 void    push(t_stack **from, t_stack **to)
@@ -46,12 +52,12 @@ void    push(t_stack **from, t_stack **to)
 void   pa(t_stack **b, t_stack **a)
 {
     push(b, a);
-    write(2, "pa\n", 3);
+    write(1, "pa\n", 3);
 }
 void   pb(t_stack **a, t_stack **b)
 {
     push(a, b);
-    write(2, "pb\n", 3);
+    write(1, "pb\n", 3);
 }
 
 void    rotate(t_stack **list)
@@ -73,18 +79,18 @@ void    rotate(t_stack **list)
 void   ra(t_stack **a)
 {
     rotate(a);
-    write(2, "ra\n", 3);
+    write(1, "ra\n", 3);
 }
 void   rb(t_stack **b)
 {
     rotate(b);
-    write(2, "rb\n", 3);
+    write(1, "rb\n", 3);
 }
 void   rr(t_stack **a, t_stack **b)
 {
     rotate(a);
     rotate(b);
-    write(2, "rr\n", 3);
+    write(1, "rr\n", 3);
 }
 
 void    reverse(t_stack **list)
@@ -106,18 +112,18 @@ void    reverse(t_stack **list)
 void   rra(t_stack **a)
 {
     reverse(a);
-    write(2, "rra\n", 4);
+    write(1, "rra\n", 4);
 }
 
 void   rrb(t_stack **b)
 {
     reverse(b);
-    write(2, "rrb\n", 4);
+    write(1, "rrb\n", 4);
 }
 
 void   rrr(t_stack **a, t_stack **b)
 {
     reverse(a);
     reverse(b);
-    write(2, "rrr\n", 4);
+    write(1, "rrr\n", 4);
 }

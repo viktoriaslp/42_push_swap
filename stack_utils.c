@@ -46,3 +46,25 @@ void    sort_three(t_stack **list)
     if ((*list)->value > (*list)->next->value)
         sa(list);
 }
+
+void    set_index(t_stack *a)
+{
+    t_stack *node_to_set;
+    t_stack *node_to_com;
+    int     index;
+
+    node_to_set = a;
+    while (node_to_set)
+    {
+        node_to_com = a;
+        index = 0;
+        while (node_to_com)
+        {
+            if (node_to_set->value > node_to_com->value)
+                index++;
+            node_to_com = node_to_com->next;
+        }
+        node_to_set->index = index;
+        node_to_set = node_to_set->next;
+    }
+}

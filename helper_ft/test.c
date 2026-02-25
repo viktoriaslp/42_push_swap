@@ -37,7 +37,7 @@ void    test(t_stack **a, t_stack **b)
     while (temp)
     {
         printf("value: %i\n", temp->value);
-        // printf("index: %i\n", temp->index );
+        //printf("index: %i\n", temp->index );
         // printf("pos: %i\n",temp->pos);
         // printf("target_pos: %i\n", temp->target_pos);
         // printf("cost_a: %i\n",temp->cost_a);
