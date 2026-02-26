@@ -16,6 +16,7 @@ typedef struct s_stack
     int         target_pos;
     int         cost_a;
     int         cost_b;
+    int         total_cost;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -61,7 +62,21 @@ void    push_swap(t_stack **orig_a, t_stack **orig_b, int size_a);
 void    set_index(t_stack *a);
 void    set_cur_pos(t_stack *head);
 void    set_tar_pos(t_stack *a, t_stack *b);
-void    to_top_cost(t_stack *list, int size);
+void    cost_b(t_stack *list, int size);
+void    cost_a(t_stack *list, int size);
+
+void    set_total_cost(t_stack *b, int size_a, int size_b);
+t_stack *lowest_cost(t_stack *b);
+void    do_rot(t_stack **a, t_stack **b, int rot_a, int rot_b);
+t_stack *find_lowest(t_stack *a);
+void    final_sort(t_stack **a, int size_a);
+
+
+int     fc_abs(int x);
+int     fc_max(int x, int y);
+int     fc_min(int x, int y);
+
+
 
 
 #endif
