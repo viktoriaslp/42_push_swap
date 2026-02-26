@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*   push_and_main_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 15:31:00 by vslyunko          #+#    #+#             */
-/*   Updated: 2026/02/26 15:36:04 by vslyunko         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:15:08 by vslyunko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,39 +51,18 @@ void	sort_three(t_stack **list)
 		sa(list);
 }
 
-void	set_index(t_stack *a)
+t_stack	*find_lowest(t_stack *a)
 {
-	t_stack	*node_to_set;
-	t_stack	*node_to_com;
-	int		index;
+	t_stack	*temp;
+	t_stack	*lowest;
 
-	node_to_set = a;
-	while (node_to_set)
+	temp = a->next;
+	lowest = a;
+	while (temp)
 	{
-		node_to_com = a;
-		index = 0;
-		while (node_to_com)
-		{
-			if (node_to_set->value > node_to_com->value)
-				index++;
-			node_to_com = node_to_com->next;
-		}
-		node_to_set->index = index;
-		node_to_set = node_to_set->next;
+		if (lowest->index > temp->index)
+			lowest = temp;
+		temp = temp->next;
 	}
-}
-
-void	final_sort(t_stack **a, int size_a)
-{
-	t_stack	*lowest_node;
-
-	lowest_node = find_lowest(*a);
-	while (lowest_node->pos != 0)
-	{
-		if (lowest_node->pos < size_a / 2)
-			ra(a);
-		else
-			rra(a);
-		set_cur_pos(*a);
-	}
+	return (lowest);
 }
