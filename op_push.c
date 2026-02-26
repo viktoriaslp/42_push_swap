@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   op_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/26 15:57:20 by vslyunko          #+#    #+#             */
-/*   Updated: 2025/11/26 17:45:23 by vslyunko         ###   ########.fr       */
+/*   Created: 2026/02/26 15:15:37 by vslyunko          #+#    #+#             */
+/*   Updated: 2026/02/26 15:18:22 by vslyunko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	push(t_stack **from, t_stack **to)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
-	tmp = lst;
-	while (tmp != NULL)
-	{
-		f(tmp->content);
-		tmp = tmp->next;
-	}
+	if (!from || !*from)
+		return ;
+	tmp = (*from)->next;
+	(*from)->next = *to;
+	*to = *from;
+	*from = tmp;
+}
+
+void	pa(t_stack **b, t_stack **a)
+{
+	push(b, a);
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_stack **a, t_stack **b)
+{
+	push(a, b);
+	write(1, "pb\n", 3);
 }

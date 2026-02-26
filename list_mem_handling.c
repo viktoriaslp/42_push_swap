@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   list_mem_handling.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/17 11:39:43 by vslyunko          #+#    #+#             */
-/*   Updated: 2025/11/24 13:04:36 by vslyunko         ###   ########.fr       */
+/*   Created: 2026/02/26 15:08:46 by vslyunko          #+#    #+#             */
+/*   Updated: 2026/02/26 15:09:52 by vslyunko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	*ft_memset(void *s, size_t n)
 	}
 	return (s);
 }
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*memalloc;
@@ -35,4 +36,28 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	ft_memset(memalloc, (nmemb * size));
 	return (memalloc);
+}
+
+void	free_list(t_stack **lst)
+{
+	t_stack	*tmp;
+
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	lst = NULL;
+}
+
+void	end_clean(t_stack **list_a, t_stack **list_b)
+{
+	if (list_a)
+		free_list(list_a);
+	if (list_b)
+		free_list(list_b);
+	exit (0);
 }

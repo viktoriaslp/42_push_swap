@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_func.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/26 15:06:23 by vslyunko          #+#    #+#             */
+/*   Updated: 2026/02/26 15:06:50 by vslyunko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*ft_lstnew(int value)
@@ -52,19 +64,4 @@ void	lst_add_back(t_stack **lst, t_stack *new)
 		tmp = ft_lstlast(*lst);
 		tmp->next = new;
 	}
-}
-
-void	free_list(t_stack **lst)
-{
-	t_stack	*tmp;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
-	}
-	lst = NULL;
 }

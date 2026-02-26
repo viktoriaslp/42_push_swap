@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   parse_utils_split.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vslyunko <vslyunko@student.42malaga.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:58:46 by vslyunko          #+#    #+#             */
-/*   Updated: 2025/11/25 15:15:22 by vslyunko         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:01:27 by vslyunko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	i = 0;
 	src_len = 0;
-	while(src[src_len])
+	while (src[src_len])
 		src_len++;
 	if (size == 0)
 		return (src_len);
