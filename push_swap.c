@@ -65,9 +65,9 @@ void	do_rot(t_stack **a, t_stack **b, int rot_a, int rot_b)
 	{
 		r_num = fc_min(rot_a, rot_b);
 		rot_two_list(a, b, rrr, r_num);
-		if (rot_a > rot_b)
+		if (rot_a < rot_b)
 			rot_one_list(a, rra, rot_a, rot_b);
-		else if (rot_a < rot_b)
+		else if (rot_a > rot_b)
 			rot_one_list(b, rrb, rot_b, rot_a);
 	}
 	else

@@ -71,6 +71,7 @@ void	rrr(t_stack **a, t_stack **b);
 // Algorithm/Sort Checklist
 int		is_sorted(t_stack *list);
 void	sort_three(t_stack **list);
+void	sort_five(t_stack **a, t_stack **b);
 t_stack	*find_lowest(t_stack *a);
 
 void	set_index(t_stack *a);

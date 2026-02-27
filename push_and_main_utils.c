@@ -51,6 +51,35 @@ void	sort_three(t_stack **list)
 		sa(list);
 }
 
+void	sort_five(t_stack **a, t_stack **b)
+{
+	set_index(*a);
+	while (ft_lstsize(*a) > 3)
+	{
+		set_cur_pos(*a);
+		if ((*a)->index == 0 || (*a)->index == 1)
+			pb(a, b);
+		else if ((*a)->next->index == 0 || (*a)->next->index == 1)
+		{
+			ra(a);
+			pb(a, b);
+		}
+		else if ((*a)->next->next->index == 0 || (*a)->next->next->index == 1)
+		{
+			ra(a);
+			ra(a);
+			pb(a, b);
+		}
+		else
+			rra(a);
+	}
+	sort_three(a);
+	if ((*b)->index < (*b)->next->index)
+		sb(b);
+	pa(b, a);
+	pa(b, a);
+}
+
 t_stack	*find_lowest(t_stack *a)
 {
 	t_stack	*temp;
