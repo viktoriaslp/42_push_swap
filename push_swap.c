@@ -107,7 +107,7 @@ void	push_swap(t_stack **orig_a, t_stack **orig_b, int size_a)
 		set_tar_pos(*orig_a, *orig_b);
 		cost_b(*orig_b, size_b);
 		cost_a(*orig_b, size_a);
-		set_total_cost(*orig_b, size_a, size_b);
+		set_total_cost(*orig_b);
 		low_cost_node = lowest_cost(*orig_b);
 		do_rot(orig_a, orig_b, low_cost_node->cost_a, low_cost_node->cost_b);
 		pa(orig_b, orig_a);

@@ -86,7 +86,7 @@ void	cost_a(t_stack *list, int size)
 	}
 }
 
-void	set_total_cost(t_stack *b, int size_a, int size_b)
+void	set_total_cost(t_stack *b)
 {
 	while (b)
 	{

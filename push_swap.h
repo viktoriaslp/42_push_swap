@@ -85,7 +85,7 @@ void	set_cur_pos(t_stack *head);
 void	set_tar_pos(t_stack *a, t_stack *b);
 void	cost_b(t_stack *list, int size);
 void	cost_a(t_stack *list, int size);
-void	set_total_cost(t_stack *b, int size_a, int size_b);
+void	set_total_cost(t_stack *b);
 
 void	rot_one_list(t_stack **list,
 			void (*op)(t_stack **), int big, int small);

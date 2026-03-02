@@ -16,8 +16,8 @@ void	rot_one_list(t_stack **list, void (*op)(t_stack **), int big, int small)
 {
 	int	n;
 
-    big = fc_abs(big);
-    small = fc_abs(small);
+	big = fc_abs(big);
+	small = fc_abs(small);
 	n = big - small;
 	while (n > 0)
 	{
