@@ -1,7 +1,7 @@
 *This project has been created as part of the 42 curriculum by vslyunko*
 
 <p align="center">
-  <img src="push-swap-banner.png" alt="Push Swap banner" width="100%">
+  <img src="push-swap-banner.jpg" alt="Push Swap banner" width="100%">
 </p>
 
 <p align="center">
