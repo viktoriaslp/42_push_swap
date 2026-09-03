@@ -1,95 +1,186 @@
 *This project has been created as part of the 42 curriculum by vslyunko*
 
-# DESCRIPTION
+<p align="center">
+  <img src="push-swap-banner.png" alt="Push Swap banner" width="100%">
+</p>
 
-In this project, we write a C program to sort data in a stack using a limited set of instruction. The program calculates and displays a sequence of instructions needed to sort the given integers. 
+<p align="center">
+  <img src="https://img.shields.io/badge/42-Project-6C3EB8?style=flat" alt="42 Project">
+  <img src="https://img.shields.io/badge/Language-C-6C3EB8?style=flat&logo=c&logoColor=white" alt="C">
+  <img src="https://img.shields.io/badge/Data_Structure-Stacks-6C3EB8?style=flat" alt="Stacks">
+  <img src="https://img.shields.io/badge/Algorithm-Cost--Based_Greedy-6C3EB8?style=flat" alt="Cost-Based Greedy">
+</p>
 
-We have at our disposal a set of integer values, 2 stacks, and a set of instructions to manipulate both stacks.
+<p align="center">
+  Sort a stack using the fewest possible operations
+</p>
 
-The goal is to sort the stack with the lowest possible number of operations.
+## DESCRIPTION
 
-### To achieve the goal, I chose a customized cost-based greedy insertion sorting algorithm.
-The overall structure of the algorithm is as follows:
-- Assign an index to each element (its position in the sorted order).
-- Push all elements except three to stack B.
-- Sort the three remaining elements in stack A.
-- For each node in stack B:
-	- Calculate its target position in stack A.
-	- Calculate cost_a (rotations needed in A).
-	- Calculate cost_b (rotations needed in B).
-- Select the node with the lowest total cost.
-- Execute combined rotations when possible (e.g., rr or rrr) to minimize the number of moves.
-- Push the selected node back to stack A (pa).
-- Repeat the process until stack B is empty.
-- Perform a final rotation of stack A so that the smallest element is at the top.
+**Push Swap** is a sorting algorithm project built around two stacks and a limited set of operations.
+
+The program receives a sequence of integers in **stack A** and must sort them using **stack B** as auxiliary storage.
+
+```text
+Initial                 Sorted
+
+A       B               A       B
+│ 8 │                   │ 1 │
+│ 3 │                   │ 3 │
+│ 5 │       →           │ 5 │
+│ 1 │                   │ 8 │
+└───┘   └───┘           └───┘   └───┘
+```
+
+Instead of printing the sorted numbers, `push_swap` outputs the sequence of stack operations required to reach the sorted state.
+
+```bash
+$ ./push_swap 3 2 1
+ra
+sa
+```
+
+The challenge is not only to sort the numbers correctly, but to do it with the **lowest possible number of operations**.
 
 ---
-# INSTRUCTIONS
+
+## INSTRUCTIONS
 
 ### Compilation
 
-1. Compile the program
-```
+```bash
 make
-make clean      # removes object files (.o)
-make fclean     # removes object files and executables
-make re         # recompiles everything from scratch
 ```
-2. Running the program.
+
+Other available rules:
+
+```bash
+make clean      # Remove object files
+make fclean     # Remove object files and executable
+make re         # Recompile everything
 ```
+
+### Running Push Swap
+
+```bash
 ./push_swap 3 2 1 6 5
 ```
-push_swap support this 3 cases:
-- A single number, e.g., 42
-- Multiple numbers separated by spaces, e.g., "3 2 1"
-- Or a mixture of both single and multi-number arguments, e.g., 5 "8 4 2" 7
 
-Generate instructions and pass them to checker
+Arguments can be provided individually, inside strings, or as a combination:
+
+```bash
+./push_swap 42
+./push_swap "3 2 1"
+./push_swap 5 "8 4 2" 7
 ```
+
+### Checking the result
+
+The generated operations can be sent directly to the checker:
+
+```bash
 ./push_swap 3 2 1 | ./checker 3 2 1
 ```
-Add automatic generator of numbers.
-```
-ARG=$(ruby -e "puts (1..500).to_a.shuffle.join(' ')"); valgrind ./push_swap $ARG
-```
-OK — the stack is sorted correctly.
-KO — the stack is not sorted.
 
-Supported Operations:
+The checker returns:
+
+- `OK` — the stack was sorted correctly.
+- `KO` — the resulting stack is not sorted.
+
+For larger random tests:
+
+```bash
+ARG=$(ruby -e "puts (1..500).to_a.shuffle.join(' ')")
+./push_swap $ARG | ./checker $ARG
 ```
-sa	Swap the first two elements of stack A
-sb	Swap the first two elements of stack B
-ss	Swap A and B simultaneously
-pa	Push the first element from B to A
-pb	Push the first element from A to B
-ra	Rotate stack A upwards
-rb	Rotate stack B upwards
-rr	Rotate A and B simultaneously upwards
-rra	Reverse rotate stack A
-rrb	Reverse rotate stack B
-rrr	Reverse rotate both A and B
+To check for memory leaks with Valgrind:
+```bash
+valgrind ./push_swap $ARG
 ```
 
-# RESOURCES:
+---
 
-- Peer to peer.
+## HOW IT WORKS
+
+My implementation uses a **cost-based greedy insertion strategy**.
+
+**Index → Move to B → Sort 3 → Find cheapest move → Insert into A → Final rotation**
+
+### 1. Prepare the stacks
+
+Each number receives an index corresponding to its position in the sorted sequence.
+
+Most elements are moved from **A → B**, leaving three elements in A that can be sorted directly.
+
+### 2. Find the cheapest element to move
+
+For every element in B, the algorithm determines:
+
+- where it belongs in A;
+- how many rotations A needs;
+- how many rotations B needs.
+
+```text
+Element in B
+     │
+     ├── rotations needed in A
+     │
+     └── rotations needed in B
+                 │
+                 ↓
+              total cost
+```
+
+The element with the **lowest movement cost** is selected.
+
+### 3. Combine movements
+
+When both stacks need to rotate in the same direction, operations are combined:
+
+```text
+ra + rb   → rr
+rra + rrb → rrr
+```
+
+This reduces the total number of instructions.
+
+The selected element is pushed back to A and the process repeats until B is empty.
+
+Finally, A is rotated until the smallest element is at the top.
+
+---
+
+## OPERATIONS
+
+| Operation | Action |
+| :---: | --- |
+| `sa` / `sb` | Swap the first two elements of stack A / B |
+| `ss` | Swap both stacks |
+| `pa` | Push the first element from B to A |
+| `pb` | Push the first element from A to B |
+| `ra` / `rb` | Rotate stack A / B upwards |
+| `rr` | Rotate both stacks upwards |
+| `rra` / `rrb` | Reverse rotate stack A / B |
+| `rrr` | Reverse rotate both stacks |
+
+---
+
+## RESOURCES
 
 ### Theory
-The following resources (recommended in the subject) were used to understand the fundamental concepts:
 
 - [Algorithm Analysis – Wikipedia](https://es.wikipedia.org/wiki/An%C3%A1lisis_de_algoritmos)
 - [Stack (Abstract Data Type) – Wikipedia](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 
-### Research & Approaches
-To analyze the problem and explore different implementation strategies:
+### Push Swap strategies
 
 - [Push_swap Explanation – YouTube](https://www.youtube.com/watch?v=OaG81sDEpVk)
 - [Push_swap Strategy – YouTube](https://www.youtube.com/watch?v=wRvipSG4Mmk)
-
-### Main Algorithm
-The core sorting logic is mainly based on:
-
 - [Sorting Algorithm for 3 Numbers – Codequoi (Archived)](https://web.archive.org/web/20220802162832/https://www.codequoi.com/en/push_swap-efficient-positional-sorting-algorithm/#sorting_algorithm_for_3_numbers)
 - [Push_swap Turk Algorithm – Medium](https://pure-forest.medium.com/push-swap-turk-algorithm-explained-in-6-steps-4c6650a458c0)
 
-AI tools were used as a conceptual support tool during development.
+### AI usage
+
+AI tools were used as conceptual support during development to discuss sorting strategies, reason about algorithmic decisions and clarify unfamiliar concepts.
+
+All implementation decisions and suggestions were reviewed and understood before being incorporated into the project.
