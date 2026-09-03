@@ -5,10 +5,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/42-Project-6C3EB8?style=flat" alt="42 Project">
-  <img src="https://img.shields.io/badge/Language-C-6C3EB8?style=flat&logo=c&logoColor=white" alt="C">
-  <img src="https://img.shields.io/badge/Data_Structure-Stacks-6C3EB8?style=flat" alt="Stacks">
-  <img src="https://img.shields.io/badge/Algorithm-Cost--Based_Greedy-6C3EB8?style=flat" alt="Cost-Based Greedy">
+  <img src="https://img.shields.io/badge/Language-245C45?style=flat&logo=c&logoColor=white" alt="C">
+  <img src="https://img.shields.io/badge/Linked_Lists-245C45?style=flat" alt="Linked Lists">
+  <img src="https://img.shields.io/badge/Greedy_Algorithm-245C45?style=flat" alt="Greedy Algorithm">
+  <img src="https://img.shields.io/badge/Algorithmic_Optimization-245C45?style=flat" alt="Algorithmic Optimization">
+  <img src="https://img.shields.io/badge/Memory_Management-245C45?style=flat" alt="Memory Management">
 </p>
 
 <p align="center">
